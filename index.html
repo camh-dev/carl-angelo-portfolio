@@ -1,0 +1,1076 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Carl Angelo Hernandez | Software Engineer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        /* =====================================
+           PROJECT GALLERIES
+        ===================================== */
+
+        .gallery-card {
+            cursor: pointer;
+            font: inherit;
+            color: inherit;
+            text-align: left;
+        }
+
+        .gallery-card img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .project-image-button {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .project-image-button img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* =====================================
+           IMAGE VIEWER MODAL
+        ===================================== */
+
+        #imageViewer {
+            display: none;
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999999;
+            background: rgba(8, 12, 18, 0.97);
+            justify-content: center;
+            align-items: center;
+            padding: 65px 85px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        #imageViewer.active {
+            display: flex;
+        }
+
+        #imageViewer .viewer-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            min-width: 0;
+            min-height: 0;
+        }
+
+        #imageViewer #viewerImage {
+            display: block;
+            max-width: 100%;
+            max-height: calc(100vh - 155px);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        #imageViewer .viewer-caption {
+            color: #f2f2f2;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            margin-top: 14px;
+            text-align: center;
+        }
+
+        #imageViewer .viewer-counter {
+            color: #929baa;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        /* EXIT BUTTON */
+
+        #imageViewer #viewerClose {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            width: 46px;
+            height: 46px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #343d49;
+            border-radius: 50%;
+            background: #1d2531;
+            color: #d5ad69;
+            font-size: 30px;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        /* PREVIOUS AND NEXT BUTTONS */
+
+        #imageViewer #viewerPrev,
+        #imageViewer #viewerNext {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #343d49;
+            border-radius: 50%;
+            background: #1d2531;
+            color: #d5ad69;
+            font-size: 22px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        #imageViewer #viewerPrev {
+            left: 22px;
+        }
+
+        #imageViewer #viewerNext {
+            right: 22px;
+        }
+
+        #imageViewer #viewerClose:hover,
+        #imageViewer #viewerPrev:hover,
+        #imageViewer #viewerNext:hover {
+            background: #d5ad69;
+            color: #141920;
+        }
+
+        #imageViewer button:focus-visible {
+            outline: 2px solid #d5ad69;
+            outline-offset: 4px;
+        }
+
+        body.viewer-open {
+            overflow: hidden;
+        }
+
+        /* =====================================
+           RESPONSIVE IMAGE VIEWER
+        ===================================== */
+
+        @media (max-width: 600px) {
+
+            #imageViewer {
+                padding: 65px 45px;
+            }
+
+            #imageViewer #viewerImage {
+                max-width: 100%;
+                max-height: calc(100vh - 170px);
+            }
+
+            #imageViewer #viewerPrev {
+                left: 5px;
+            }
+
+            #imageViewer #viewerNext {
+                right: 5px;
+            }
+
+            #imageViewer #viewerPrev,
+            #imageViewer #viewerNext {
+                width: 38px;
+                height: 38px;
+                font-size: 17px;
+            }
+
+            #imageViewer #viewerClose {
+                top: 12px;
+                right: 12px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================
+         NAVIGATION
+    ====================================== -->
+
+    <nav class="navbar container">
+
+        <a href="#home" class="logo">CAH<span>.</span></a>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+    </nav>
+
+
+    <main>
+
+        <!-- =====================================
+             HERO SECTION
+        ====================================== -->
+
+        <section class="hero container" id="home">
+
+            <div class="hero-content">
+
+                <p class="eyebrow">
+                    SOFTWARE ENGINEER / FREELANCE DEVELOPER
+                </p>
+
+                <h1>
+                    Hello, I'm<br>
+                    <span>Carl Angelo Hernandez.</span>
+                </h1>
+
+                <p class="hero-description">
+                    I am a Software Engineer and Freelance Developer
+                    specializing in building functional, user-focused
+                    web applications and digital solutions. I turn ideas
+                    into practical systems through clean development,
+                    problem-solving, and innovative technology.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#projects" class="btn-primary">
+                        Explore Projects →
+                    </a>
+
+                    <a href="#contact" class="btn-secondary">
+                        Contact Me
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="hero-info">
+
+                <div class="info-card">
+                    <span class="info-label">PROFESSIONAL ROLE</span>
+                    <h3>Software Engineer</h3>
+                    <p>Freelance Developer</p>
+                </div>
+
+                <div class="info-card">
+                    <span class="info-label">SPECIALIZATION</span>
+                    <h3>Web & System Development</h3>
+                    <p>Software Solutions & Database Management</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ABOUT SECTION
+        ====================================== -->
+
+        <section class="section container" id="about">
+
+            <p class="eyebrow">01 / ABOUT ME</p>
+
+            <h2>Getting to know me.</h2>
+
+            <p class="section-description">
+                I am a Software Engineer and Freelance Developer
+                with experience in web development, system design,
+                database management, and digital solutions.
+
+                I specialize in developing practical, user-friendly
+                applications that solve real-world problems.
+
+                Through professional experience and project
+                development, I continuously improve my technical
+                skills and explore new technologies to deliver
+                effective and reliable solutions.
+            </p>
+
+        </section>
+
+
+        <!-- =====================================
+             SKILLS SECTION
+        ====================================== -->
+
+        <section class="section container" id="skills">
+
+            <p class="eyebrow">02 / TECHNICAL SKILLS</p>
+
+            <h2>Tools I work with.</h2>
+
+            <div class="skills-grid">
+
+                <div class="skill-card">HTML</div>
+                <div class="skill-card">CSS</div>
+                <div class="skill-card">PHP</div>
+                <div class="skill-card">Python</div>
+                <div class="skill-card">MySQL</div>
+                <div class="skill-card">Git & GitHub</div>
+                <div class="skill-card">VS Code</div>
+                <div class="skill-card">System Design</div>
+                <div class="skill-card">Data Analysis</div>
+                <div class="skill-card">Database Management</div>
+                <div class="skill-card">Flowcharting</div>
+                <div class="skill-card">Axure RP</div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             PROJECTS SECTION
+        ====================================== -->
+
+        <section class="section container" id="projects">
+
+            <p class="eyebrow">03 / SELECTED WORKS</p>
+
+            <h2>Projects & Development.</h2>
+
+            <p class="section-description">
+                A selection of systems and applications I have
+                developed, demonstrating my experience in web
+                development, database management, and practical
+                software solutions.
+            </p>
+
+            <div class="projects-grid">
+
+                <!-- PROJECT 01: VBS -->
+
+                <article class="project-card">
+
+                    <div class="project-image">
+
+                        <button
+                            type="button"
+                            class="project-image-button gallery-card"
+                            data-gallery="vbs"
+                            data-index="0"
+                            aria-label="View Vehicle Booking System screenshots">
+
+                            <img
+                                src="images/vehicle-booking.png"
+                                alt="Vehicle Booking System"
+                                loading="lazy"
+                            >
+
+                        </button>
+
+                    </div>
+
+                    <div class="project-details">
+
+                        <span class="project-number">PROJECT 01</span>
+
+                        <h3>Vehicle Booking System</h3>
+
+                        <p>
+                            A web-based vehicle reservation system
+                            that allows users to select pickup and
+                            drop-off locations, choose available
+                            vehicles, specify passenger details,
+                            and submit booking requests.
+                        </p>
+
+                        <div class="tags">
+                            <span>React</span>
+                            <span>PHP</span>
+                            <span>Tailwind CSS</span>
+                        </div>
+
+                        <div class="project-actions">
+
+                            <a
+                                href="https://atpecoop.info/VehicleManagement/"
+                                class="project-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View Live System →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJECT 02: DMS -->
+
+                <article class="project-card">
+
+                    <div class="project-image">
+
+                        <button
+                            type="button"
+                            class="project-image-button gallery-card"
+                            data-gallery="dms"
+                            data-index="0"
+                            aria-label="View Documentation Management System screenshots">
+
+                            <img
+                                src="images/dms/dashboard.png"
+                                alt="Documentation Management System Dashboard"
+                                loading="lazy"
+                            >
+
+                        </button>
+
+                    </div>
+
+                    <div class="project-details">
+
+                        <span class="project-number">PROJECT 02</span>
+
+                        <h3>Documentation Management System</h3>
+
+                        <p>
+                            A web-based document management platform
+                            designed to centralize document storage,
+                            tracking, and retrieval. The system includes
+                            user and role management, document archiving,
+                            activity logs, document sharing, edit requests,
+                            and messaging features.
+                        </p>
+
+                        <div class="tags">
+                            <span>PHP</span>
+                            <span>MySQL</span>
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+
+                        <div class="project-actions">
+
+                            <a
+                                href="https://atpecoop.info/dms/login.php"
+                                class="project-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View Live System →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             VBS SCREENSHOT GALLERY
+        ====================================== -->
+
+        <section class="section container" id="vbs-gallery">
+
+            <p class="eyebrow">PROJECT 01 / SYSTEM SCREENSHOTS</p>
+
+            <h2>Vehicle Management System.</h2>
+
+            <p class="section-description">
+                Explore the different pages and modules of the
+                Vehicle Management System. Click any image to
+                view the full-size screenshot.
+            </p>
+
+            <div class="skills-grid">
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="vbs" data-index="0">
+                    <img src="images/vbs/DriverPage.png"
+                        alt="Driver Page" loading="lazy">
+                    <p>Driver Page</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="vbs" data-index="1">
+                    <img src="images/vbs/LoginPage.png"
+                        alt="Login Page" loading="lazy">
+                    <p>Login Page</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="vbs" data-index="2">
+                    <img src="images/vbs/ManageDrivers.png"
+                        alt="Manage Drivers" loading="lazy">
+                    <p>Manage Drivers</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="vbs" data-index="3">
+                    <img src="images/vbs/ManageFinishedTickets.png"
+                        alt="Manage Finished Tickets" loading="lazy">
+                    <p>Manage Finished Tickets</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="vbs" data-index="4">
+                    <img src="images/vbs/ManageRequests.png"
+                        alt="Manage Requests" loading="lazy">
+                    <p>Manage Requests</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="vbs" data-index="5">
+                    <img src="images/vbs/ManageVehicles.png"
+                        alt="Manage Vehicles" loading="lazy">
+                    <p>Manage Vehicles</p>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             DMS SCREENSHOT GALLERY
+        ====================================== -->
+
+        <section class="section container" id="dms-gallery">
+
+            <p class="eyebrow">PROJECT 02 / SYSTEM SCREENSHOTS</p>
+
+            <h2>Documentation Management System.</h2>
+
+            <p class="section-description">
+                Explore the different modules and interfaces
+                of the Documentation Management System.
+                Click any image to view the full-size screenshot.
+            </p>
+
+            <div class="skills-grid">
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="dms" data-index="0">
+                    <img src="images/dms/dashboard.png"
+                        alt="Dashboard" loading="lazy">
+                    <p>Dashboard</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="dms" data-index="1">
+                    <img src="images/dms/activity_logs.png"
+                        alt="Activity Logs" loading="lazy">
+                    <p>Activity Logs</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="dms" data-index="2">
+                    <img src="images/dms/archives.png"
+                        alt="Archives" loading="lazy">
+                    <p>Archives</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="dms" data-index="3">
+                    <img src="images/dms/Documents.png"
+                        alt="Documents" loading="lazy">
+                    <p>Documents</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="dms" data-index="4">
+                    <img src="images/dms/edit_request.png"
+                        alt="Edit Request" loading="lazy">
+                    <p>Edit Request</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="dms" data-index="5">
+                    <img src="images/dms/login.png"
+                        alt="Login" loading="lazy">
+                    <p>Login</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="dms" data-index="6">
+                    <img src="images/dms/messages.png"
+                        alt="Messages" loading="lazy">
+                    <p>Messages</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="dms" data-index="7">
+                    <img src="images/dms/roles.png"
+                        alt="Roles" loading="lazy">
+                    <p>Roles</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="dms" data-index="8">
+                    <img src="images/dms/shared_with_me.png"
+                        alt="Shared With Me" loading="lazy">
+                    <p>Shared With Me</p>
+                </button>
+
+                <button type="button" class="skill-card gallery-card"
+                    data-gallery="dms" data-index="9">
+                    <img src="images/dms/users.png"
+                        alt="Users" loading="lazy">
+                    <p>Users</p>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             EXPERIENCE SECTION
+        ====================================== -->
+
+        <section class="section container" id="experience">
+
+            <p class="eyebrow">04 / EXPERIENCE</p>
+
+            <h2>Professional Experience.</h2>
+
+            <div class="experience-card">
+
+                <span class="project-number">
+                    PROFESSIONAL EXPERIENCE
+                </span>
+
+                <h3>Amkor Technology Cooperative</h3>
+
+                <p>Documentation Management System Intern</p>
+
+                <ul>
+                    <li>
+                        Developed and optimized document tracking
+                        and retrieval workflows.
+                    </li>
+
+                    <li>
+                        Organized technical records and structured data.
+                    </li>
+
+                    <li>
+                        Managed database entries while maintaining
+                        data integrity.
+                    </li>
+
+                    <li>
+                        Worked with system documentation and
+                        document management processes.
+                    </li>
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             CONTACT SECTION
+        ====================================== -->
+
+        <section class="section container" id="contact">
+
+            <p class="eyebrow">05 / GET IN TOUCH</p>
+
+            <h2>Let's work together.</h2>
+
+            <p class="section-description">
+                I am available for freelance projects, software
+                development opportunities, and collaborations.
+                Have an idea or project in mind? Let's work together
+                and turn your vision into reality.
+            </p>
+
+            <div class="contact-links">
+
+                <a
+                    href="https://wa.me/639949425890"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Chat with me on WhatsApp"
+                >
+                    Chat Me on WhatsApp →
+                </a>
+
+                <a
+                    href="https://github.com/camh-dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    GitHub →
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer class="footer container">
+
+        <p>© 2026 Carl Angelo Hernandez. All rights reserved.</p>
+
+        <span>Designed & Developed by Carl Angelo Hernandez.</span>
+
+    </footer>
+
+
+    <!-- =====================================
+         IMAGE VIEWER MODAL
+    ====================================== -->
+
+    <div
+        class="image-viewer"
+        id="imageViewer"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Project screenshot viewer"
+    >
+
+        <button
+            type="button"
+            id="viewerClose"
+            aria-label="Close image viewer"
+        >
+            &times;
+        </button>
+
+        <button
+            type="button"
+            id="viewerPrev"
+            aria-label="Previous image"
+        >
+            &#10094;
+        </button>
+
+        <div class="viewer-content">
+
+            <img
+                src=""
+                alt="Project screenshot"
+                id="viewerImage"
+            >
+
+            <div id="viewerCaption" class="viewer-caption"></div>
+
+            <div id="viewerCounter" class="viewer-counter"></div>
+
+        </div>
+
+        <button
+            type="button"
+            id="viewerNext"
+            aria-label="Next image"
+        >
+            &#10095;
+        </button>
+
+    </div>
+
+
+    <!-- =====================================
+         IMAGE VIEWER JAVASCRIPT
+    ====================================== -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const galleries = {
+
+                vbs: [
+                    {
+                        src: "images/vbs/DriverPage.png",
+                        title: "Driver Page"
+                    },
+                    {
+                        src: "images/vbs/LoginPage.png",
+                        title: "Login Page"
+                    },
+                    {
+                        src: "images/vbs/ManageDrivers.png",
+                        title: "Manage Drivers"
+                    },
+                    {
+                        src: "images/vbs/ManageFinishedTickets.png",
+                        title: "Manage Finished Tickets"
+                    },
+                    {
+                        src: "images/vbs/ManageRequests.png",
+                        title: "Manage Requests"
+                    },
+                    {
+                        src: "images/vbs/ManageVehicles.png",
+                        title: "Manage Vehicles"
+                    }
+                ],
+
+                dms: [
+                    {
+                        src: "images/dms/dashboard.png",
+                        title: "Dashboard"
+                    },
+                    {
+                        src: "images/dms/activity_logs.png",
+                        title: "Activity Logs"
+                    },
+                    {
+                        src: "images/dms/archives.png",
+                        title: "Archives"
+                    },
+                    {
+                        src: "images/dms/Documents.png",
+                        title: "Documents"
+                    },
+                    {
+                        src: "images/dms/edit_request.png",
+                        title: "Edit Request"
+                    },
+                    {
+                        src: "images/dms/login.png",
+                        title: "Login"
+                    },
+                    {
+                        src: "images/dms/messages.png",
+                        title: "Messages"
+                    },
+                    {
+                        src: "images/dms/roles.png",
+                        title: "Roles"
+                    },
+                    {
+                        src: "images/dms/shared_with_me.png",
+                        title: "Shared With Me"
+                    },
+                    {
+                        src: "images/dms/users.png",
+                        title: "Users"
+                    }
+                ]
+
+            };
+
+
+            const viewer = document.getElementById("imageViewer");
+            const viewerImage = document.getElementById("viewerImage");
+            const viewerCaption = document.getElementById("viewerCaption");
+            const viewerCounter = document.getElementById("viewerCounter");
+
+            const closeButton = document.getElementById("viewerClose");
+            const previousButton = document.getElementById("viewerPrev");
+            const nextButton = document.getElementById("viewerNext");
+
+            let currentGallery = [];
+            let currentIndex = 0;
+            let previousFocus = null;
+
+
+            // DISPLAY CURRENT IMAGE
+
+            function showImage() {
+
+                const image = currentGallery[currentIndex];
+
+                if (!image) return;
+
+                viewerImage.src = image.src;
+                viewerImage.alt = image.title;
+
+                viewerCaption.textContent = image.title;
+
+                viewerCounter.textContent =
+                    `${currentIndex + 1} / ${currentGallery.length}`;
+
+            }
+
+
+            // OPEN VIEWER
+
+            function openViewer(galleryName, index, trigger) {
+
+                const selectedGallery = galleries[galleryName];
+
+                if (!selectedGallery || !selectedGallery.length) {
+                    return;
+                }
+
+                currentGallery = selectedGallery;
+
+                currentIndex = Math.max(
+                    0,
+                    Math.min(index, currentGallery.length - 1)
+                );
+
+                previousFocus = trigger;
+
+                showImage();
+
+                viewer.classList.add("active");
+
+                document.body.classList.add("viewer-open");
+
+                closeButton.focus();
+
+            }
+
+
+            // NEXT IMAGE
+
+            function nextImage() {
+
+                if (!currentGallery.length) return;
+
+                currentIndex =
+                    (currentIndex + 1) % currentGallery.length;
+
+                showImage();
+
+            }
+
+
+            // PREVIOUS IMAGE
+
+            function previousImage() {
+
+                if (!currentGallery.length) return;
+
+                currentIndex =
+                    (currentIndex - 1 + currentGallery.length)
+                    % currentGallery.length;
+
+                showImage();
+
+            }
+
+
+            // CLOSE VIEWER
+
+            function closeViewer() {
+
+                viewer.classList.remove("active");
+
+                document.body.classList.remove("viewer-open");
+
+                viewerImage.removeAttribute("src");
+
+                currentGallery = [];
+
+                currentIndex = 0;
+
+                if (previousFocus && previousFocus.isConnected) {
+                    previousFocus.focus();
+                }
+
+                previousFocus = null;
+
+            }
+
+
+            // CLICK GALLERY IMAGES
+
+            document.querySelectorAll(".gallery-card").forEach(button => {
+
+                button.addEventListener("click", function () {
+
+                    const galleryName = this.dataset.gallery;
+
+                    const imageIndex = Number(this.dataset.index);
+
+                    openViewer(galleryName, imageIndex, this);
+
+                });
+
+            });
+
+
+            // BUTTON EVENTS
+
+            nextButton.addEventListener("click", nextImage);
+
+            previousButton.addEventListener("click", previousImage);
+
+            closeButton.addEventListener("click", closeViewer);
+
+
+            // CLICK OUTSIDE TO CLOSE
+
+            viewer.addEventListener("click", function (event) {
+
+                if (event.target === viewer) {
+                    closeViewer();
+                }
+
+            });
+
+
+            // KEYBOARD CONTROLS
+
+            document.addEventListener("keydown", function (event) {
+
+                if (!viewer.classList.contains("active")) {
+                    return;
+                }
+
+                if (event.key === "ArrowRight") {
+                    event.preventDefault();
+                    nextImage();
+                }
+
+                if (event.key === "ArrowLeft") {
+                    event.preventDefault();
+                    previousImage();
+                }
+
+                if (event.key === "Escape") {
+                    closeViewer();
+                }
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>
